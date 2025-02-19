@@ -1,3 +1,4 @@
+
 const API_URL = "http://localhost:8080";
 
 export async function login(credentials) {
@@ -52,6 +53,7 @@ export async function addProduct(product) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      token: JSON.parse(localStorage.getItem("user")).token,
     },
     body: JSON.stringify(product),
   });

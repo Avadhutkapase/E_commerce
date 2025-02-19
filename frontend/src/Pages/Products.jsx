@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect, useState } from "react"
 import { Plus, Edit, Trash2 } from "lucide-react"
@@ -116,7 +116,7 @@ export default function Products() {
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
             >
               <Plus className="h-5 w-5 mr-2" />
-              search product
+              Add New Product
             </Link>
           </div>
         </div>
@@ -133,12 +133,13 @@ export default function Products() {
               </div>
               <div className="p-4 flex-grow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
+                <p className="text-gray-600 text-sm line-clamp-3 mb-2">{product.stock}</p>
                 <p className="text-gray-600 text-sm line-clamp-3 mb-2">{product.description}</p>
                 <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
               </div>
               <div className="p-4 border-t">
                 <div className="flex justify-between items-center">
-                 
+                  
                   <div className="flex space-x-2">
                     <button
                       onClick={() => handleAddToCart(product._id)}
@@ -146,18 +147,18 @@ export default function Products() {
                     >
                       Add to Cart
                     </button>
-                    <Link
+                    {JSON.parse(localStorage.getItem('user')).id == product.user && <Link
                       to={`/products/edit/${product._id}`}
                       className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                     >
                       <Edit className="h-5 w-5" />
-                    </Link>
-                    <button
+                    </Link>}
+                    {JSON.parse(localStorage.getItem('user')).id == product.user && <button
                       onClick={() => handleDeleteProduct(product._id)}
                       className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
                     >
                       <Trash2 className="h-5 w-5" />
-                    </button>
+                    </button>}
                   </div>
                 </div>
               </div>
@@ -168,4 +169,3 @@ export default function Products() {
     </div>
   )
 }
-
